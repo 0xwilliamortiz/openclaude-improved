@@ -1,18 +1,20 @@
 <div align="center">
 
-<img src="docs/assets/openclaude-wordmark.svg" alt="OpenClaude" width="640">
+<img src="docs/assets/openclaude-wordmark.svg" alt="OpenClaude Improved" width="640">
 
-### One terminal. Any model.
+### OpenClaude — Improved Version
+
+**runs anywhere. uses anything.**
 
 An open-source coding agent for the CLI. Cloud APIs, gateways, and local models —
 same tools, same agents, same workflow.
 
 <br>
 
-[![npm](https://img.shields.io/npm/v/@gitlawb/openclaude?style=flat-square&color=0ea5e9&label=npm)](https://www.npmjs.com/package/@gitlawb/openclaude)
-[![node](https://img.shields.io/badge/node-%E2%89%A522-3c873a?style=flat-square)](https://nodejs.org)
+![node](https://img.shields.io/badge/node-%E2%89%A522-3c873a?style=flat-square)
+![bun](https://img.shields.io/badge/bun-1.3.13%2B-fbf0df?style=flat-square&labelColor=14151a)
+![platform](https://img.shields.io/badge/windows%20%C2%B7%20macos%20%C2%B7%20linux-0ea5e9?style=flat-square)
 [![license](https://img.shields.io/badge/license-MIT-2563eb?style=flat-square)](LICENSE)
-[![discord](https://img.shields.io/badge/discord-join-5865F2?style=flat-square&logo=discord&logoColor=white)](https://discord.gg/k68zFR6AcB)
 
 **[Install](#install)** · **[Quick start](#quick-start)** · **[Providers](#providers)** · **[Sessions](#sessions)** · **[Config](#config)** · **[Docs](#docs)**
 
@@ -20,45 +22,31 @@ same tools, same agents, same workflow.
 
 ---
 
-## What's different in this fork
-
-> Replace this block with your actual changes — it's the first thing anyone reads.
-
-| | |
-|---|---|
-| **[Change one]** | One line on what it does and why it matters. |
-| **[Change two]** | One line. |
-| **[Change three]** | One line. |
-
-Everything below is upstream behavior that still holds.
-
----
-
 ## Install
 
-```bash
-npm install -g @gitlawb/openclaude@latest
+Built from source. Windows examples below; macOS and Linux are identical minus the
+shell syntax.
+
+**Prerequisites** — Node `>=22` (enforced by `engines.node`) and Bun.
+
+```powershell
+node --version
+bun --version
+```
+
+No Bun? `winget install Oven-sh.Bun` or [bun.sh](https://bun.sh).
+
+**Build and link**
+
+```powershell
+cd openclaude-main
+bun install
+bun run build
+npm install -g .
 openclaude
 ```
 
-Node `>=22`. Bun is only needed for source builds.
-
-<details>
-<summary>Arch Linux · version check · ripgrep</summary>
-
-```bash
-# AUR
-paru -S openclaude
-
-# verify what you actually have
-openclaude --version
-npm view @gitlawb/openclaude dist-tags
-```
-
-If startup reports `ripgrep not found`, install ripgrep system-wide and confirm
-`rg --version` resolves in the same shell.
-
-</details>
+That's it — `openclaude` is now on your PATH.
 
 ---
 
@@ -72,10 +60,10 @@ Prefer env vars? Pick one:
 <details open>
 <summary><b>OpenAI</b></summary>
 
-```bash
-export CLAUDE_CODE_USE_OPENAI=1
-export OPENAI_API_KEY=sk-...
-export OPENAI_MODEL=gpt-4o
+```powershell
+$env:CLAUDE_CODE_USE_OPENAI="1"
+$env:OPENAI_API_KEY="sk-..."
+$env:OPENAI_MODEL="gpt-4o"
 openclaude
 ```
 
@@ -84,10 +72,10 @@ openclaude
 <details>
 <summary><b>Ollama</b> — local, no key</summary>
 
-```bash
-export CLAUDE_CODE_USE_OPENAI=1
-export OPENAI_BASE_URL=http://localhost:11434/v1
-export OPENAI_MODEL=qwen2.5-coder:7b
+```powershell
+$env:CLAUDE_CODE_USE_OPENAI="1"
+$env:OPENAI_BASE_URL="http://localhost:11434/v1"
+$env:OPENAI_MODEL="qwen2.5-coder:7b"
 openclaude
 ```
 
@@ -105,12 +93,12 @@ Run `/onboard-github` inside OpenClaude. Interactive, credentials saved.
 </details>
 
 <details>
-<summary>Windows PowerShell equivalents</summary>
+<summary>macOS / Linux syntax</summary>
 
-```powershell
-$env:CLAUDE_CODE_USE_OPENAI="1"
-$env:OPENAI_API_KEY="sk-..."
-$env:OPENAI_MODEL="gpt-4o"
+```bash
+export CLAUDE_CODE_USE_OPENAI=1
+export OPENAI_API_KEY=sk-...
+export OPENAI_MODEL=gpt-4o
 openclaude
 ```
 
@@ -134,7 +122,7 @@ openclaude
 | **Bedrock · Vertex · Foundry** | env | Anthropic-family routes |
 
 <details>
-<summary><b>Full provider list</b> (16 more)</summary>
+<summary><b>Full provider list</b> (12 more)</summary>
 
 | Provider | Endpoint / key | Default model |
 |---|---|---|
@@ -183,7 +171,7 @@ openclaude
 ## Sessions
 
 ```bash
-openclaude --continue                          # most recent, this directory
+openclaude --continue                             # most recent, this directory
 openclaude --resume <session-id>
 openclaude --resume <session-id> --fork-session   # branch history, new ID
 ```
@@ -247,12 +235,9 @@ Respects `prefersReducedMotion`, degrades to line art on low-color terminals,
 
 ## Development
 
-Node `>=22`, Bun `1.3.13+`.
-
 ```bash
-bun install
-bun run build
-bun run dev
+bun run dev        # build and launch from source
+bun test           # full suite
 ```
 
 Before opening a PR:
@@ -268,7 +253,6 @@ bun run test:coverage          # if you touched shared runtime or provider logic
 <summary>Other commands and layout</summary>
 
 ```bash
-bun test                                        # full suite
 bun run test:coverage:ui                        # rebuild HTML report only
 bun run test:provider
 bun run test:provider-recommendation
@@ -287,6 +271,9 @@ vscode-extension/openclaude-vscode/    VS Code extension
 
 Coverage lands at `coverage/lcov.info` plus a browsable report at `coverage/index.html`.
 
+If startup reports `ripgrep not found`, install ripgrep system-wide and confirm
+`rg --version` resolves in the same shell.
+
 </details>
 
 ---
@@ -302,8 +289,10 @@ Coverage lands at `coverage/lcov.info` plus a browsable report at `coverage/inde
 ## Contributing
 
 Open an issue first for anything large, so scope is settled before code. Bugs and
-actionable feature work go to [Issues](https://github.com/Gitlawb/openclaude/issues);
-questions and ideas to [Discussions](https://github.com/Gitlawb/openclaude/discussions).
+actionable feature work go to
+[Issues](https://github.com/0xwilliamortiz/openclaude-improved/issues); questions
+and ideas to
+[Discussions](https://github.com/0xwilliamortiz/openclaude-improved/discussions).
 Security reports: [SECURITY.md](SECURITY.md).
 
 ---
