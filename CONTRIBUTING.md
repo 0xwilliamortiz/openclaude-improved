@@ -82,7 +82,7 @@ Submitting a PR is a commitment to see it through. Please be prepared to:
 - **If you need more time**, leave a comment explaining your situation and expected timeline
 - **PRs with no activity for 2 weeks after a review request** will be closed as abandoned. At that point, another contributor may pick up the work under a new PR
 
-This policy ensures the project stays maintainable and that contributor queue doesn't grow stale. We understand life happens — a quick note explaining a delay goes a long way.
+This policy ensures the project stays maintainable and that the contributor queue doesn't grow stale. We understand life happens — a quick note explaining a delay goes a long way.
 
 ### Duplicate PRs
 
