@@ -228,7 +228,7 @@ fires its signature move on every Enter.
 /buddy set corsair      cannonball with smoke trail
 ```
 
-Respects `prefersReducedMotion`, degrades to line art on low-color terminals,
+Respects `prefersReducedMotion`, degrades to line art on low-color terminals;
 `/buddy mute` silences it. Needs ~100 columns for the full sprite.
 
 ---
