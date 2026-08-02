@@ -146,7 +146,7 @@ node dist/cli.mjs
 
 ## Why Not Groq or Cerebras?
 
-Both were tested and fail due to OpenClaude's large system prompt (~50K tokens):
+Both were tested and failed due to OpenClaude's large system prompt (~50K tokens):
 
 - **Groq free tier**: TPM limits too low (6K–12K tokens/min)
 - **Cerebras free tier**: TPM limits exceeded, even on `llama3.1-8b`
